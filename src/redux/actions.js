@@ -13,7 +13,8 @@ import {
 import {
   reqRegister,
   reqLogin,
-  reqUpdateUser
+  reqUpdateUser,
+  reqUser
 } from '../api'
 
 //成功的同步action
@@ -23,8 +24,8 @@ const errorMsg = (msg) => ({type: ERROR_MSG, data: msg});
 //接收用户同步action
 const recieveUser = (user) =>({type:RECEIVE_USER,data:user});
 //重置用户同步action
-const resetUser = (msg) =>({type:RESET_USER,data:msg});
-
+export const resetUser = (msg) =>({type:RESET_USER,data:msg});
+//
 
 
 //注册的异步action
@@ -109,4 +110,20 @@ export function updateUser(user){
     }
   }
 }
+
+
+//获取当前用户的异步action
+export function getUser(){
+  return  async dispatch =>{
+    const response = await reqUser()
+    const result = response.data;
+    if(result.code ===0){
+      dispatch(recieveUser(result.data))
+    }else{
+      dispatch(resetUser(result.data))
+    }
+  }
+}
+
+
 

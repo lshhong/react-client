@@ -1,9 +1,16 @@
+/*消息列表主界面*/
 import React, {Component} from 'react';
+import {connect} from 'react-redux'
 
-export default class Message extends Component {
+class Message extends Component {
   render(){
     return(
       <div>Message</div>
     )
   }
 }
+
+export default connect(
+  state =>({}),
+  {}
+)(Message)
