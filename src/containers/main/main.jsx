@@ -13,6 +13,7 @@ import Dashen from '../dashen/dashen'
 import Laoban from '../laoban/laoban'
 import Message from '../message/message'
 import Personal from '../personal/personal'
+import Chat from '../chat/chat'
 import NotFound from '../../components/not-found/not-found'
 import NavFooter from '../../components/nav-footer/nav-footer'
 
@@ -65,7 +66,7 @@ class Main extends Component{
       return <Redirect to="/login"/>
     }
     // 2. 登陆过(cookie中有userid), 但当前还没有登陆(state.user._id没有), 需要实现自动登陆(发请求获取当前user)
-    const {user} = this.props;
+    const {user, unReadCount} = this.props;
     if(!user._id){
       //render中不能发送ajax请求
       return null
@@ -82,10 +83,10 @@ class Main extends Component{
     const currentNav = this.navList.find(function(nav,index){
       return path === nav.path
     })
-
+    // console.log(currentNav);
     //根据用户类型决定隐藏哪个nav
     const {navList} = this
-    if(user.path ==="dashen"){
+    if(user.type ==="dashen"){
       navList[0].hide = true;
     }else{
       navList[1].hide = true
@@ -101,15 +102,16 @@ class Main extends Component{
           <Route path="/dashen" component={Dashen}/>
           <Route path="/message" component={Message}/>
           <Route path="/personal" component={Personal}/>
+          <Route path="/chat/:userid" component={Chat}/>
           <Route component={NotFound}/>
         </Switch>
-        {currentNav ? <NavFooter navList={navList}/> : null}
+        {currentNav ? <NavFooter unReadCount={unReadCount} navList={navList}/> : null}
       </div>
     )
   }
 }
 
 export default connect(
-  state=>({user:state.user}),
+  state=>({user:state.user,unReadCount:state.chat.unReadCount}),
   {getUser}
 )(Main)

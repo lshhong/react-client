@@ -15,6 +15,15 @@ export const reqUpdateUser = (user) =>ajax(BASE + '/update',user, 'POST');
 //获取当前用户
 export const reqUser = () =>ajax(BASE + '/user')
 
+//获取用户列表
+export const reqUsers = (type) =>ajax(BASE + '/userlist',{type})
+
+// 请求获取当前用户的所有聊天记录
+export const reqChatMsgList = () => ajax(BASE + '/msglist')
+
+// 标识查看了指定用户发送的聊天信息
+export const reqReadChatMsg = (from) => ajax(BASE + '/readmsg', {from}, 'POST')
+
 /*
 模块1: export xxx  export yyy: 向外暴露的是 {xxx, yyy}
 模块2: export default xxx: 向外暴露的是xxx

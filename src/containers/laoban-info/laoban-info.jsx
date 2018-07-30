@@ -34,7 +34,7 @@ class LaobanInfo extends Component {
   render(){
     const {header} = this.props.user;
     if(header){//用户信息已完善
-     return <Redirect to='/dashen'/>
+     return <Redirect to='/laoban'/>
     }
     return(
       <div>
