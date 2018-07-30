@@ -16,7 +16,7 @@ export default function ajax(url = '', data = {}, type = 'GET') {
     if(dataStr){//username=Tom&password=123&
       //去掉最后的&
       dataStr = dataStr.substring(0,dataStr.length-1)
-      url = "?" + dataStr
+      url += "?" + dataStr
     }
     return axios.get(url)
   }else{

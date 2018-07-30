@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {HashRouter,Route,Switch} from 'react-router-dom'
 import {Provider} from 'react-redux'
 
+// import './test/socketio_test'
+
 import './assets/css/index.less'
 import store from './redux/store';
 import Register from './containers/register/register';

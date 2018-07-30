@@ -5,18 +5,22 @@ import {withRouter} from 'react-router-dom'
 
 class NavFooter extends Component {
   static propTypes = {
-    navList:PropTypes.array.isRequired
+    navList:PropTypes.array.isRequired,
+    unReadCount:PropTypes.number.isRequired
   }
 
   render(){
-    const navList = this.props.navList.filter((nav)=> !nav.hide)
+    // console.log(this.props.navList);
+    const navList = this.props.navList.filter(nav=> !nav.hide)
     const path = this.props.location.pathname;
+    // console.log(navList);
     //根据数据数组生成数组标签
     return(
       <TabBar>
         {
           navList.map(nav =>(
             <TabBar.Item key={nav.path}
+              badge={nav.path === '/message' ? this.props.unReadCount : 0}
               title={nav.text}
               icon={{uri: require(`./imgs/${nav.icon}.png`)}}
               selectedIcon={{uri: require(`./imgs/${nav.icon}-selected.png`)}}

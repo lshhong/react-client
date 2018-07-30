@@ -30,7 +30,7 @@ class DashenInfo extends Component {
   render(){
     const {header} = this.props.user;
     if(header){//用户信息已完善
-      return <Redirect to='/laoban'/>
+      return <Redirect to='/dashen'/>
     }
     return(
       <div>
